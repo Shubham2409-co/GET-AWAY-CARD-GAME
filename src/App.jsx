@@ -27,7 +27,6 @@ function AuthPage() {
     const savedUser = JSON.parse(localStorage.getItem("user"));
 
     if (isLogin) {
-      // LOGIN
       if (
         savedUser &&
         savedUser.username === formData.username &&
@@ -39,7 +38,6 @@ function AuthPage() {
         alert("Invalid username or password");
       }
     } else {
-      // REGISTER
       if (
         !formData.username ||
         !formData.firstName ||
@@ -62,14 +60,14 @@ function AuthPage() {
 
   return (
     <div style={styles.container}>
-      {/* HEADING */}
       <div style={styles.heading}>GET AWAY GAME!! ♠️</div>
 
-      {/* FORM */}
       <form style={styles.card} onSubmit={handleSubmit}>
-        <h2>{isLogin ? "Login" : "Register"}</h2>
+        <h2 style={{ marginBottom: "10px" }}>
+          {isLogin ? "Login" : "Register"}
+        </h2>
 
-        {/* LOGIN FIELD */}
+        {/* LOGIN */}
         {isLogin && (
           <input
             type="text"
@@ -80,7 +78,7 @@ function AuthPage() {
           />
         )}
 
-        {/* REGISTER FIELDS */}
+        {/* REGISTER */}
         {!isLogin && (
           <>
             <input
@@ -121,7 +119,7 @@ function AuthPage() {
           </>
         )}
 
-        {/* COMMON PASSWORD */}
+        {/* PASSWORD */}
         <input
           type="password"
           name="password"
@@ -134,8 +132,7 @@ function AuthPage() {
           {isLogin ? "Login" : "Register"}
         </button>
 
-        {/* TOGGLE */}
-        <p style={{ marginTop: "10px" }}>
+        <p style={{ marginTop: "10px", fontSize: "14px" }}>
           {isLogin ? "Don't have an account?" : "Already have an account?"}
           <span onClick={() => setIsLogin(!isLogin)} style={styles.link}>
             {isLogin ? " Register" : " Login"}
@@ -146,52 +143,66 @@ function AuthPage() {
   );
 }
 
-/* 🎨 STYLES */
+/* ✅ RESPONSIVE STYLES */
 const styles = {
   container: {
-    height: "100vh",
-    width:"100vw",
+    minHeight: "100vh",
+    width: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     background: "linear-gradient(to right, #141e30, #243b55)",
     flexDirection: "column",
+    padding: "20px",
+    boxSizing: "border-box",
+    position: "relative",
   },
+
   heading: {
     position: "absolute",
-    top: "40px",
-    fontSize: "36px",
+    top: "20px",
+    fontSize: "clamp(22px, 4vw, 36px)",
     fontWeight: "800",
     background: "linear-gradient(to right, #ff7e5f, #feb47b)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
-    letterSpacing: "3px",
+    letterSpacing: "2px",
+    textAlign: "center",
   },
+
   card: {
     background: "#fff",
-    padding: "30px",
+    padding: "clamp(20px, 5vw, 30px)",
     borderRadius: "12px",
-    width: "320px",
+    width: "100%",
+    maxWidth: "380px",
     textAlign: "center",
     boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
   },
+
   input: {
     width: "100%",
     padding: "10px",
     margin: "8px 0",
     borderRadius: "6px",
     border: "1px solid #ccc",
+    fontSize: "16px",
+    boxSizing: "border-box",
+    outline: "none",
   },
+
   button: {
     width: "100%",
-    padding: "10px",
+    padding: "12px",
     background: "#243b55",
     color: "#fff",
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
     marginTop: "10px",
+    fontSize: "16px",
   },
+
   link: {
     color: "#007bff",
     cursor: "pointer",
